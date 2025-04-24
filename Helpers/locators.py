@@ -13,3 +13,4 @@ error_message = "//ul[contains(@class,'error')]"
 
 text_hello = "//p[contains(text(),'Hello')]"
 button_sign_out = "//a[text()='Sign out']"
+button_log_out = "//a[text()='Logout']"

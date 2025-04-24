@@ -54,4 +54,4 @@ class TestRegisterUser:
         self.login_page_obj.enter_register_email(email)
         self.login_page_obj.enter_register_password(password)
         self.login_page_obj.click_register_button()
-        assert self.login_page_obj.is_registration_successful()
+        assert self.login_page_obj.is_registration_or_login_successful()

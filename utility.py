@@ -29,3 +29,10 @@ def update_json_file(file_path, key, new_value):
         data[key] = new_value
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
+
+
+def read_json_file(file_name):
+    file_path = get_file_path(file_name)
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data

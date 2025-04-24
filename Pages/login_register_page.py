@@ -39,13 +39,14 @@ class LoginRegisterPage(BasePage):
         else:
             log.error("Hello text found after login")
             log.error("Going back to login page")
-            self.driver.get(constants.LOGIN_PAGE_URL)
+            driver_helpers.click_element(self.driver, locators.button_log_out)
             return False
 
-    def is_registration_successful(self):
+    def is_registration_or_login_successful(self):
         status = driver_helpers.wait_till_element_is_clickable(self.driver, locators.button_sign_out, timeout=10)
         if status:
-            log.info("Registration successful")
+            log.info("Login successful")
+            driver_helpers.click_element(self.driver, locators.button_log_out)
             return True
         else:
             log.error("Registration failed with correct creds")
