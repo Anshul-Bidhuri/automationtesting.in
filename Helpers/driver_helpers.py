@@ -18,11 +18,9 @@ log = customLogger.get_logger()
 
 def type_text(driver, locator=None, text=None, element=None):
     log.info(f"typing {text} inside the locator {locator}")
-    sleep(1)
     element = get_element(driver, locator) if not element else element
     move_to_element(driver, element)
     element.clear()
-    sleep(1)
     return element.send_keys(text)
 
 
@@ -31,18 +29,25 @@ def click_enter(element):
 
 
 def wait_till_element_is_present(driver, locator, timeout=30):
-    log.info(f"waiting for locator {locator} to be present")
-    element = WebDriverWait(driver, timeout=timeout).until(
-        expected_conditions.presence_of_element_located((By.XPATH, locator)))
-    log.info(f"locator {locator} present")
-    return element
+    try:
+        log.info(f"waiting for locator {locator} to be present")
+        element = WebDriverWait(driver, timeout=timeout).until(
+            expected_conditions.presence_of_element_located((By.XPATH, locator)))
+        log.info(f"locator {locator} present")
+        return element
+    except TimeoutException:
+        return False
 
 
 def wait_until_element_not_visible(driver, locator, timeout=30):
-    log.info(f"waiting for locator {locator} to be invisible")
-    wait = WebDriverWait(driver, timeout)
-    element = wait.until(expected_conditions.invisibility_of_element_located(locator))
-    log.info(f"locator {locator} to be vanished")
+    log.info(f"waiting for locator {locator} to be vanished")
+    try:
+        wait = WebDriverWait(driver, timeout)
+        element = wait.until(expected_conditions.invisibility_of_element_located((By.XPATH, locator)))
+        log.info(f"locator {locator} vanished")
+        return element
+    except TimeoutException:
+        return False
 
 
 def wait_till_element_is_visible(driver, locator, timeout=60):
