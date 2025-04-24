@@ -12,3 +12,4 @@ error_message = "//ul[contains(@class,'error')]"
 # home screen
 
 text_hello = "//p[contains(text(),'Hello')]"
+button_sign_out = "//a[text()='Sign out']"

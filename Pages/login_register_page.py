@@ -7,7 +7,8 @@ from Helpers import customLogger, constants
 
 log = customLogger.get_logger()
 
-class LoginPage(BasePage):
+
+class LoginRegisterPage(BasePage):
 
     def enter_login_username(self, username):
         return driver_helpers.type_text(self.driver, locators.input_field_login_username, username)
@@ -36,7 +37,16 @@ class LoginPage(BasePage):
         if status:
             return True
         else:
-            log.error("ERROR: hello text found after login")
-            log.error("ERROR: going back to login page")
+            log.error("Hello text found after login")
+            log.error("Going back to login page")
             self.driver.get(constants.LOGIN_PAGE_URL)
+            return False
+
+    def is_registration_successful(self):
+        status = driver_helpers.wait_till_element_is_clickable(self.driver, locators.button_sign_out, timeout=10)
+        if status:
+            log.info("Registration successful")
+            return True
+        else:
+            log.error("Registration failed with correct creds")
             return False
