@@ -10,7 +10,7 @@ import utility
 class TestLoginUser:
 
     @pytest.fixture(scope="class", autouse=True)
-    def initiate_driver(self, setup_browser_login_screen, request):
+    def initiate_driver(self, setup_browser_login_page, request):
         request.cls.login_page_obj = LoginRegisterPage(self.driver)
 
     def test_login_with_empty_email_and_password(self):
@@ -70,10 +70,13 @@ class TestLoginUser:
     def test_login_with_new_registered_credentials(self):
         new_creds = utility.read_json_file("config.json")
         email, password = new_creds.get("new_user_email_address"), new_creds.get("new_user_password")
-        self.login_page_obj.enter_login_username(email)
-        self.login_page_obj.enter_login_password(password)
-        self.login_page_obj.click_login_button()
-        assert self.login_page_obj.is_registration_or_login_successful()
+        if email:
+            self.login_page_obj.enter_login_username(email)
+            self.login_page_obj.enter_login_password(password)
+            self.login_page_obj.click_login_button()
+            assert self.login_page_obj.is_registration_or_login_successful()
+        else:
+            pytest.skip("new register creds not found")
 
     @pytest.mark.positive_cases
     def test_login_page_lost_your_password_link(self):

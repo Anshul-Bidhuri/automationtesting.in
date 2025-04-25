@@ -10,7 +10,7 @@ from Pages.login_register_page import LoginRegisterPage
 class TestRegisterUser:
 
     @pytest.fixture(scope="class", autouse=True)
-    def initiate_driver(self, setup_browser_login_screen, request):
+    def initiate_driver(self, setup_browser_login_page, request):
         request.cls.login_page_obj = LoginRegisterPage(self.driver)
 
     def test_register_with_empty_email_and_password(self):

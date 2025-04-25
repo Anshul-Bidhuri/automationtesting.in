@@ -20,3 +20,26 @@ button_log_out = "//a[text()='Logout']"
 # reset password screen
 
 button_reset_password = "//input[@value='Reset Password']"
+
+
+# address page
+
+button_edit_billing_address = "//h3[contains(text(),'Billing')]/following-sibling::a[@class='edit']"
+button_edit_shipping_address = "//h3[contains(text(),'Shipping')]/following-sibling::a[@class='edit']"
+
+input_shipping_first_name = "//input[@id='shipping_first_name']"
+input_shipping_last_name = "//input[@id='shipping_last_name']"
+input_shipping_company_name = "//input[@id='shipping_company']"
+
+
+input_billing_first_name = "//input[@id='billing_first_name']"
+input_billing_last_name = "//input[@id='billing_last_name']"
+input_billing_company_name = "//input[@id='billing_company']"
+input_billing_email_address = "//input[@id='billing_email']"
+input_billing_phone = "//input[@id='billing_phone']"
+input_billing_address_1 = "//input[@id='billing_address_1']"
+input_billing_address_2 = "//input[@id='billing_address_2']"
+input_billing_city = "//input[@id='billing_city']"
+input_billing_postcode = "//input[@id='billing_postcode']"
+
+#  state country left
