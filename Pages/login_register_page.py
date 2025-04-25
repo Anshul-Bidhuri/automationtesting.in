@@ -51,3 +51,15 @@ class LoginRegisterPage(BasePage):
         else:
             log.error("Registration failed with correct creds")
             return False
+
+    def click_remember_me_button(self):
+        return driver_helpers.click_element(self.driver, locators.checkbox_remember_me)
+
+    def click_lost_your_password_link(self):
+        return driver_helpers.click_element(self.driver, locators.link_lost_your_password)
+
+    def is_reset_password_button_displayed(self):
+        return driver_helpers.is_displayed(self.driver, locators.button_reset_password)
+
+    def is_remember_me_checkbox_selected(self):
+        return driver_helpers.is_selected(self.driver, locators.checkbox_remember_me)

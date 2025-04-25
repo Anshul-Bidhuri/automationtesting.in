@@ -19,6 +19,10 @@ class TestLoginUser:
         self.login_page_obj.click_login_button()
         assert self.login_page_obj.is_error_message_displayed()
 
+    def test_login_page_remember_me_checkbox(self):
+        self.login_page_obj.click_remember_me_button()
+        assert self.login_page_obj.is_remember_me_checkbox_selected()
+
     def test_login_with_valid_email_and_empty_password(self):
         self.login_page_obj.enter_login_username(constants.ALREADY_REGISTERED_EMAIL)
         self.login_page_obj.enter_login_password("")
@@ -56,9 +60,13 @@ class TestLoginUser:
         assert self.login_page_obj.is_registration_or_login_successful()
 
     def test_login_with_new_registered_credentials(self):
-        new_creds = utility.read_json_file("config.json").get("new_user_email_address")
-        email, password = new_creds.get("consent_id"), new_creds.get("new_user_password")
+        new_creds = utility.read_json_file("config.json")
+        email, password = new_creds.get("new_user_email_address"), new_creds.get("new_user_password")
         self.login_page_obj.enter_login_username(email)
         self.login_page_obj.enter_login_password(password)
         self.login_page_obj.click_login_button()
         assert self.login_page_obj.is_registration_or_login_successful()
+
+    def test_login_page_lost_your_password_link(self):
+        self.login_page_obj.click_lost_your_password_link()
+        assert self.login_page_obj.is_reset_password_button_displayed()

@@ -108,6 +108,14 @@ def is_enabled(driver, locator, timeout=10):
     return True
 
 
+def is_selected(driver, locator, timeout=10):
+    try:
+        get_element(driver, locator, timeout).is_selected()
+    except TimeoutException:
+        return False
+    return True
+
+
 def is_text_present(driver, text):
     return text in driver.page_source
 

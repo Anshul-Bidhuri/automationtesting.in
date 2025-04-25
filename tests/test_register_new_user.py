@@ -31,6 +31,12 @@ class TestRegisterUser:
         self.login_page_obj.click_register_button()
         assert self.login_page_obj.hello_text_should_not_be_displayed()
 
+    def test_register_with_javascript_email_and_valid_password(self):
+        self.login_page_obj.enter_register_email("<script>alert(1)</script>")
+        self.login_page_obj.enter_register_password("ValidPass123!")
+        self.login_page_obj.click_register_button()
+        assert self.login_page_obj.hello_text_should_not_be_displayed()
+
     def test_register_with_invalid_email_format(self):
         self.login_page_obj.enter_register_email("invalidemail")
         self.login_page_obj.enter_register_password("ValidPass123!")
