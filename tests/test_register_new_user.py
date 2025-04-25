@@ -43,7 +43,7 @@ class TestRegisterUser:
         self.login_page_obj.click_register_button()
         assert self.login_page_obj.hello_text_should_not_be_displayed()
 
-    @pytest.mark.poitive_case
+    @pytest.mark.positive_cases
     def test_register_with_already_registered_email(self):
         self.login_page_obj.enter_register_email(constants.ALREADY_REGISTERED_EMAIL)
         self.login_page_obj.enter_register_password(constants.ALREADY_REGISTERED_PASSWORD)
@@ -56,7 +56,7 @@ class TestRegisterUser:
         self.login_page_obj.click_register_button()
         assert self.login_page_obj.hello_text_should_not_be_displayed()
 
-    @pytest.mark.poitive_case
+    @pytest.mark.positive_cases
     def test_register_with_valid_new_email_and_password(self):
         email, password = utility.generate_random_email_and_password()
         self.login_page_obj.enter_register_email(email)
