@@ -21,5 +21,6 @@ def setup_browser_address_page(request):
     driver_helpers.click_element(driver, locators.button_login)
     driver_helpers.wait_till_element_is_clickable(driver, locators.button_sign_out, timeout=10)
     driver.get(constants.ADDRESS_PAGE_URL)
+    request.cls.driver = driver
     yield driver
     driver.close()

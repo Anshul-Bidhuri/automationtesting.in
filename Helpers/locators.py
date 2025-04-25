@@ -26,6 +26,9 @@ button_reset_password = "//input[@value='Reset Password']"
 
 button_edit_billing_address = "//h3[contains(text(),'Billing')]/following-sibling::a[@class='edit']"
 button_edit_shipping_address = "//h3[contains(text(),'Shipping')]/following-sibling::a[@class='edit']"
+message_address_changed_successfully = "//div[@class='woocommerce-message' and contains(text(),'Address changed successfully.')]"
+error_message_first_name_required = "//li[normalize-space()='First Name is a required field.']"
+error_box = "//ul[@class='woocommerce-error']"
 
 input_shipping_first_name = "//input[@id='shipping_first_name']"
 input_shipping_last_name = "//input[@id='shipping_last_name']"
@@ -42,4 +45,5 @@ input_billing_address_2 = "//input[@id='billing_address_2']"
 input_billing_city = "//input[@id='billing_city']"
 input_billing_postcode = "//input[@id='billing_postcode']"
 
+button_save_address = "//input[@name='save_address']"
 #  state country left
