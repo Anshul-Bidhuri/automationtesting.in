@@ -23,6 +23,12 @@ class TestLoginUser:
         self.login_page_obj.click_remember_me_button()
         assert self.login_page_obj.is_remember_me_checkbox_selected()
 
+    def test_register_with_javascript_email_and_valid_password(self):
+        self.login_page_obj.enter_regienter_login_usernamester_email("<script>alert(1)</script>")
+        self.login_page_obj.enter_login_password(constants.ALREADY_REGISTERED_PASSWORD)
+        self.login_page_obj.click_login_button()
+        assert self.login_page_obj.is_error_message_displayed()
+
     def test_login_with_valid_email_and_empty_password(self):
         self.login_page_obj.enter_login_username(constants.ALREADY_REGISTERED_EMAIL)
         self.login_page_obj.enter_login_password("")
@@ -53,12 +59,14 @@ class TestLoginUser:
         self.login_page_obj.click_login_button()
         assert self.login_page_obj.is_error_message_displayed()
 
+    @pytest.mark.poitive_case
     def test_login_with_old_valid_credentials(self):
         self.login_page_obj.enter_login_username(constants.ALREADY_REGISTERED_EMAIL)
         self.login_page_obj.enter_login_password(constants.ALREADY_REGISTERED_PASSWORD)
         self.login_page_obj.click_login_button()
         assert self.login_page_obj.is_registration_or_login_successful()
 
+    @pytest.mark.poitive_case
     def test_login_with_new_registered_credentials(self):
         new_creds = utility.read_json_file("config.json")
         email, password = new_creds.get("new_user_email_address"), new_creds.get("new_user_password")
@@ -67,6 +75,7 @@ class TestLoginUser:
         self.login_page_obj.click_login_button()
         assert self.login_page_obj.is_registration_or_login_successful()
 
+    @pytest.mark.poitive_case
     def test_login_page_lost_your_password_link(self):
         self.login_page_obj.click_lost_your_password_link()
         assert self.login_page_obj.is_reset_password_button_displayed()
