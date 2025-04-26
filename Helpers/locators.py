@@ -27,7 +27,7 @@ button_reset_password = "//input[@value='Reset Password']"
 button_edit_billing_address = "//h3[contains(text(),'Billing')]/following-sibling::a[@class='edit']"
 button_edit_shipping_address = "//h3[contains(text(),'Shipping')]/following-sibling::a[@class='edit']"
 message_address_changed_successfully = "//div[@class='woocommerce-message' and contains(text(),'Address changed successfully.')]"
-error_message_first_name_required = "//li[normalize-space()='First Name is a required field.']"
+error_message_field_required = "//li[normalize-space()='{error_message}']"
 error_box = "//ul[@class='woocommerce-error']"
 
 input_shipping_first_name = "//input[@id='shipping_first_name']"

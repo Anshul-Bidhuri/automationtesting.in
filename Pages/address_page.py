@@ -40,8 +40,15 @@ class AddressPage(BasePage):
     def click_save_address_button(self):
         return driver_helpers.click_element(self.driver, locators.button_save_address)
 
-    def first_name_mandatory_message_displayed(self):
-        return driver_helpers.is_displayed(self.driver, locators.error_message_first_name_required, timeout=5)
+    def error_message_displayed(self, error_message):
+        log.info(f"Error message: '{error_message}' should be displayed")
+        status = driver_helpers.is_displayed(self.driver, locators.error_message_field_required.format(error_message=error_message), timeout=5)
+        if status:
+            log.info(f"Error message: '{error_message}' is displayed")
+            return True
+        else:
+            log.error(f"Error message: '{error_message}' is not found")
+            return False
 
     def error_box_displayed(self):
         time.sleep(2)

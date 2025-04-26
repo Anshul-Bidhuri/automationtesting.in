@@ -19,9 +19,14 @@ log = customLogger.get_logger()
 def type_text(driver, locator=None, text=None, element=None):
     log.info(f"typing {text} inside the locator {locator}")
     element = get_element(driver, locator) if not element else element
-    move_to_element(driver, element)
     element.clear()
-    return element.send_keys(text)
+    try:
+        element.send_keys(text)
+    except StaleElementReferenceException:
+        element = get_element(driver, locator)
+        element.clear()
+        move_to_element(driver, element)
+        element.send_keys(text)
 
 
 def click_enter(element):
