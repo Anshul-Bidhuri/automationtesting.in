@@ -128,3 +128,60 @@ class TestAddressPage:
         self.address_page_obj.fill_mandatory_fields_billing_address(address_1="<script>alert(1)</script>")
         self.address_page_obj.click_save_address_button()
         assert self.address_page_obj.error_message_displayed(error_message="Address is not valid.")
+
+    def test_save_billing_address_with_javascript_code_inside_address_2_field(self):
+        self.address_page_obj.enter_billing_address_address_2(value="<script>alert(1)</script>")
+        self.address_page_obj.fill_mandatory_fields_billing_address()
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Address field should not contain special characters.")
+
+    def test_save_billing_address_with_invalid_char_inside_address_2_field(self):
+        self.address_page_obj.enter_billing_address_address_2(value="@&^!#^&*")
+        self.address_page_obj.fill_mandatory_fields_billing_address()
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Address field should not contain special characters.")
+
+    def test_save_billing_address_with_empty_city_field(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(city="")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Town / City is a required field.")
+
+    def test_save_billing_address_with_invalid_city_format(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(city="98@$@@!!")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="City is not valid.")
+
+    def test_save_billing_address_with_min_length_city_check(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(city="ab")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="City is not valid.")
+
+    def test_save_billing_address_with_javascript_code_inside_city_field(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(city="<script>alert(1)</script>")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="City is not valid.")
+
+    def test_save_billing_address_with_empty_postcode_field(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(postcode="")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Postcode / ZIP is a required field.")
+
+    def test_save_billing_address_with_invalid_postcode_format(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(postcode="98")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Postcode is not valid.")
+
+    def test_save_billing_address_with_max_length_postcode_check(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(postcode="987987987987987987987")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Postcode is not valid.")
+
+    def test_save_billing_address_with_javascript_code_inside_postcode_field(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(postcode="<script>alert(1)</script>")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Postcode is not valid.")
+
+    def test_save_billing_address_with_string_inside_postcode_field(self):
+        self.address_page_obj.fill_mandatory_fields_billing_address(postcode="abcdefgh")
+        self.address_page_obj.click_save_address_button()
+        assert self.address_page_obj.error_message_displayed(error_message="Postcode is not valid.")
