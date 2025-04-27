@@ -25,6 +25,7 @@ button_reset_password = "//input[@value='Reset Password']"
 # address page
 
 button_edit_billing_address = "//h3[contains(text(),'Billing')]/following-sibling::a[@class='edit']"
+text_billing_address = "(//h3[contains(text(),'Billing')]/..)/following-sibling::address"
 button_edit_shipping_address = "//h3[contains(text(),'Shipping')]/following-sibling::a[@class='edit']"
 message_address_changed_successfully = "//div[@class='woocommerce-message' and contains(text(),'Address changed successfully.')]"
 error_message_field_required = "//li[normalize-space()='{error_message}']"
@@ -51,4 +52,5 @@ dropdown_selected_country = "//div[contains(@class,'country_select')]/a/span"
 dropdown_select_state_result = "//span[@class='select2-match' and text()='{state_name}']"
 input_dropdown_select_state = "//input[@aria-owns='select2-results-2']"
 dropdown_selected_state = "//div[contains(@class,'state_select')]/a/span"
+input_field_state = "//input[@id='billing_state']"
 button_save_address = "//input[@name='save_address']"

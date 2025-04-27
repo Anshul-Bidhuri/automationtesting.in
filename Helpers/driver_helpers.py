@@ -33,6 +33,11 @@ def click_enter(element):
     element.send_keys(Keys.ENTER)
 
 
+def get_page(driver, url):
+    driver.get(url)
+    log.info(f"navigating to {url}")
+
+
 def wait_till_element_is_present(driver, locator, timeout=30):
     try:
         log.info(f"waiting for locator {locator} to be present")

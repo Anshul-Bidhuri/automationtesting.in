@@ -63,9 +63,13 @@ class AddressPage(BasePage):
         return driver_helpers.get_text(self.driver, locators.dropdown_selected_country)
 
     def select_state_from_dropdown(self, state_name):
-        driver_helpers.click_element(self.driver, locators.dropdown_selected_state, timeout=5)
-        driver_helpers.type_text(self.driver, locators.input_dropdown_select_state, state_name)
-        driver_helpers.click_element(self.driver, locators.dropdown_select_state_result.format(state_name=state_name))
+        try:
+            # this is another bug, website dropdown sometimes changes to input field
+            driver_helpers.type_text(self.driver, locators.input_field_state, state_name)
+        except:
+            driver_helpers.click_element(self.driver, locators.dropdown_selected_state, timeout=5)
+            driver_helpers.type_text(self.driver, locators.input_dropdown_select_state, state_name)
+            driver_helpers.click_element(self.driver, locators.dropdown_select_state_result.format(state_name=state_name))
 
     def get_selected_state_from_dropdown(self):
         return driver_helpers.get_text(self.driver, locators.dropdown_selected_state)
@@ -76,7 +80,28 @@ class AddressPage(BasePage):
     def open_edit_billing_address_page(self):
         current_url = driver_helpers.get_current_url(self.driver)
         if current_url != constants.BILL_ADDRESS_EDIT_PAGE_URL:
-            self.driver.get(constants.BILL_ADDRESS_EDIT_PAGE_URL)
+            driver_helpers.get_page(self.driver, constants.BILL_ADDRESS_EDIT_PAGE_URL)
+
+    def open_address_page(self):
+        current_url = driver_helpers.get_current_url(self.driver)
+        if current_url != constants.ADDRESS_PAGE_URL:
+            driver_helpers.get_page(self.driver, constants.ADDRESS_PAGE_URL)
+
+    def get_current_saved_billing_address(self):
+        return driver_helpers.get_text(self.driver, locators.text_billing_address)
+
+    def compare_saved_address_with_billing_address(self, entered_values):
+        address_on_ui = self.get_current_saved_billing_address()
+        count = 0
+        for key, value in (entered_values.items()):
+            if value not in address_on_ui:
+                log.error(f"Expected '{key}' address value '{value}' is not present on UI address")
+                count +=1
+        if count == 0:
+            log.info(f"Expected address values are present on UI {address_on_ui}")
+            return True
+        else:
+            return False
 
     def fill_mandatory_fields_billing_address(self, **kwargs):
         self.enter_billing_address_first_name(value=kwargs.get("first_name")) if "first_name" in kwargs else self.enter_billing_address_first_name()
