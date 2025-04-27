@@ -69,6 +69,8 @@ class AddressPage(BasePage):
             return True
         else:
             log.error(f"Error message: '{error_message}' is not found")
+            if self.save_address_message_displayed():
+                log.error("Address saved message is displayed")
             return False
 
     def error_box_displayed(self, error_should_display=True):
@@ -102,8 +104,12 @@ class AddressPage(BasePage):
             driver_helpers.type_text(self.driver, locators.input_dropdown_select_state, state_name)
             driver_helpers.click_element(self.driver, locators.dropdown_select_state_result.format(state_name=state_name))
 
-    def get_selected_state_from_dropdown(self):
-        return driver_helpers.get_text(self.driver, locators.dropdown_selected_state)
+    def get_selected_state_from_dropdown(self, address_type="billing"):
+        try:
+            selected_state = driver_helpers.get_text(self.driver, locators.dropdown_selected_state)
+        except:
+            selected_state = driver_helpers.get_text(self.driver, locators.input_field_shipping_state) if address_type == "shipping" else driver_helpers.get_text(self.driver, locators.input_field_billing_state)
+        return selected_state
 
     def save_address_message_displayed(self):
         return driver_helpers.is_displayed(self.driver, locators.message_address_changed_successfully, timeout=5)
