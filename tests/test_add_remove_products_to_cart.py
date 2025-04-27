@@ -62,3 +62,18 @@ class TestShopPage:
     def test_items_quantity_matching_with_total_on_cart_page(self, shop_item_details, navigate_to_cart_page):
         item_details_on_cart_page = self.cart_page_obj.get_item_details_on_cart_page()
         shop_item_details["item_details_on_cart_page"] = item_details_on_cart_page
+        total_quantity = sum((item[1]['quantity']) for item in item_details_on_cart_page.items())
+        assert total_quantity == len(shop_item_details["selected_items_on_shop_page"])
+
+    def test_items_price_matching_with_total_on_cart_page(self, shop_item_details, navigate_to_cart_page):
+        total_amount_on_cart = sum((item[1]['price']) for item in shop_item_details["item_details_on_cart_page"].items())
+        assert total_amount_on_cart == shop_item_details["total_amount"]
+
+    def test_items_name_matching_with_total_on_cart_page(self, shop_item_details, navigate_to_cart_page):
+        item_names_on_cart_page = [item['name'] for item in shop_item_details["item_details_on_cart_page"].values()]
+        selected_item_names_from_shop_page = [item[1]['name'] for item in shop_item_details["selected_items_on_shop_page"]]
+        assert sorted(item_names_on_cart_page) == sorted(selected_item_names_from_shop_page)
+
+    def test_update_items_quantity_in_cart(self, shop_item_details, navigate_to_cart_page):
+        updated_item_quantity = self.cart_page_obj.update_dict_quantity_values(shop_item_details["item_details_on_cart_page"])
+        self.cart_page_obj.update_quantity_as_per_updated_item_dict(updated_item_quantity)
