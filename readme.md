@@ -39,7 +39,7 @@ Example 2: Run only the negative test cases of the billing address page:
 
 ## 🧪 Automated Test Cases
 
-### Register New User (`tests/test_register_new_user.py`)
+### 1. Register New User (`tests/test_register_new_user.py`)
 - **test_register_with_empty_email_and_password**  
   Verifies registration fails when both email and password are empty.
 - **test_register_with_valid_email_and_empty_password**  
@@ -57,7 +57,7 @@ Example 2: Run only the negative test cases of the billing address page:
 - **test_register_with_valid_new_email_and_password**  
   Verifies successful registration with valid new credentials.
 
-### Login User (`tests/test_login_user.py`)
+### 2. Login User (`tests/test_login_user.py`)
 - **test_login_with_empty_email_and_password**  
   Verifies login fails with both fields empty.
 - **test_login_with_valid_email_and_empty_password**  
@@ -77,7 +77,7 @@ Example 2: Run only the negative test cases of the billing address page:
 - **test_register_with_javascript_email_and_valid_password**  
   Checks for script injection in the email field during login.
 
-### Billing Address Page (`tests/test_billing_address_page.py`)
+### 3. Billing Address Page (`tests/test_billing_address_page.py`)
 
 - **test_complete_edit_billing_address**  
   Verifies user can complete and save billing address with all valid data.
@@ -154,7 +154,7 @@ Example 2: Run only the negative test cases of the billing address page:
 - **test_billing_address_state_dropdown**  
   Verifies that the state dropdown allows selection and saves the correct state.
 
-### Shipping Address Page (`tests/test_shipping_adress_page.py`)
+### 4. Shipping Address Page (`tests/test_shipping_adress_page.py`)
 
 - **test_complete_edit_shipping_address**  
   Verifies user can complete and save shipping address with all valid data.
@@ -216,6 +216,27 @@ Example 2: Run only the negative test cases of the billing address page:
   Verifies that the state dropdown allows selection and saves the correct state.
 
 ### 5. Shop Page (`tests/test_add_remove_products_to_cart.py`)
+
+- **test_delete_already_added_items_from_cart**  
+  Empties the cart to ensure a clean state before running other tests.
+- **test_get_items_from_shop_page**  
+  Retrieves all available items from the shop page and verifies items are present.
+- **test_random_items_from_shop_page_to_cart**  
+  Randomly selects items from the shop page and adds them to the cart.
+- **test_number_of_items_in_cart**  
+  Verifies that the number of items in the cart matches the number of items added.
+- **test_total_amount_of_cart**  
+  Checks that the total amount in the cart matches the expected sum of item prices and quantities.
+- **test_page_reload_is_not_resetting_the_cart**  
+  Ensures that reloading the page does not reset the cart contents.
+- **test_items_quantity_matching_with_total_on_cart_page**  
+  Verifies that the total quantity of items displayed on the cart page matches the number of items added.
+- **test_items_price_matching_with_total_on_cart_page**  
+  Ensures that the total price on the cart page matches the sum of (price × quantity) for all items.
+- **test_items_name_matching_with_total_on_cart_page**  
+  Checks that the names of items in the cart match the names of items added from the shop page.
+- **test_update_items_quantity_in_cart**  
+  Updates the quantity of items in the cart and verifies the update is reflected.
 - **test_total_price_after_updating_the_cart**  
   Verifies that the total cart price updates correctly after changing item quantities.
 
