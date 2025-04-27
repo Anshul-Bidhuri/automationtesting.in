@@ -59,3 +59,10 @@ dropdown_selected_state = "//div[contains(@class,'state_select')]/a/span"
 input_field_billing_state = "//input[@id='billing_state']"
 input_field_shipping_state = "//input[@id='shipping_state']"
 button_save_address = "//input[@name='save_address']"
+
+
+# shop page
+
+items_in_shop = "//ul[contains(@class,'products')]//li"
+item_names = "(//ul[contains(@class,'products')]//li//h3)[{item_num}]"
+item_prices = "((//ul[contains(@class,'products')]//span[@class='price'])[{item_num}]//span[contains(@class,'amount')])[last()]"
