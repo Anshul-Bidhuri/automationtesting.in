@@ -44,6 +44,11 @@ input_billing_address_1 = "//input[@id='billing_address_1']"
 input_billing_address_2 = "//input[@id='billing_address_2']"
 input_billing_city = "//input[@id='billing_city']"
 input_billing_postcode = "//input[@id='billing_postcode']"
+dropdown_select_country_result = "//span[@class='select2-match' and text()='{country_name}']"
+input_dropdown_select_country = "//input[@aria-owns='select2-results-1']"
+dropdown_selected_country = "//div[contains(@class,'country_select')]/a/span"
 
+dropdown_select_state_result = "//span[@class='select2-match' and text()='{state_name}']"
+input_dropdown_select_state = "//input[@aria-owns='select2-results-2']"
+dropdown_selected_state = "//div[contains(@class,'state_select')]/a/span"
 button_save_address = "//input[@name='save_address']"
-#  state country left

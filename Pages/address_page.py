@@ -42,7 +42,7 @@ class AddressPage(BasePage):
 
     def error_message_displayed(self, error_message):
         log.info(f"Error message: '{error_message}' should be displayed")
-        status = driver_helpers.is_displayed(self.driver, locators.error_message_field_required.format(error_message=error_message), timeout=5)
+        status = driver_helpers.is_displayed(self.driver, locators.error_message_field_required.format(error_message=error_message), timeout=3)
         if status:
             log.info(f"Error message: '{error_message}' is displayed")
             return True
@@ -53,6 +53,22 @@ class AddressPage(BasePage):
     def error_box_displayed(self):
         time.sleep(2)
         return driver_helpers.is_displayed(self.driver, locators.error_box, timeout=5)
+
+    def select_country_from_dropdown(self, country_name):
+        driver_helpers.click_element(self.driver, locators.dropdown_selected_country)
+        driver_helpers.type_text(self.driver, locators.input_dropdown_select_country, country_name)
+        driver_helpers.click_element(self.driver, locators.dropdown_select_country_result.format(country_name=country_name))
+
+    def get_selected_country_from_dropdown(self):
+        return driver_helpers.get_text(self.driver, locators.dropdown_selected_country)
+
+    def select_state_from_dropdown(self, state_name):
+        driver_helpers.click_element(self.driver, locators.dropdown_selected_state, timeout=5)
+        driver_helpers.type_text(self.driver, locators.input_dropdown_select_state, state_name)
+        driver_helpers.click_element(self.driver, locators.dropdown_select_state_result.format(state_name=state_name))
+
+    def get_selected_state_from_dropdown(self):
+        return driver_helpers.get_text(self.driver, locators.dropdown_selected_state)
 
     def save_address_message_displayed(self):
         return driver_helpers.is_displayed(self.driver, locators.message_address_changed_successfully, timeout=5)

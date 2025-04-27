@@ -142,9 +142,9 @@ def load_time(driver, timeout):
 
 
 def click_element(driver, locator, timeout=30):
-    wait_till_element_is_clickable(driver, locator, timeout)
+    move_to_the_element_using_javascript(driver, locator)
     element = get_element(driver, locator, timeout)
-    move_to_element(driver, element)
+    wait_till_element_is_clickable(driver, locator, timeout)
     log.info(f"clicking on locator {locator}")
     try:
         return element.click()
