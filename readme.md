@@ -26,6 +26,7 @@ To organize the test cases better, we use the following pytest markers:
     billing_address_page: Billing address test cases.
     shipping_address_page: Shipping address test cases.
     positive_cases: positive flow cases.
+    shop_page_cases: shop page test cases.
 
 Example 1: Run only login user and positive test cases:
 
@@ -35,5 +36,208 @@ Example 2: Run only the negative test cases of the billing address page:
 
     pytest --html=AutomationAssignment.html --self-contained-html --disable-warnings -m "billing_address_page and not positive_cases"
 
+
+## 🧪 Automated Test Cases
+
+### 1. Register New User (`tests/test_register_new_user.py`)
+- **test_register_with_empty_email_and_password**  
+  Verifies registration fails when both email and password are empty.
+- **test_register_with_valid_email_and_empty_password**  
+  Checks registration with a valid email but empty password.
+- **test_register_with_empty_email_and_valid_password**  
+  Checks registration with an empty email but valid password.
+- **test_register_with_invalid_email_format**  
+  Ensures error is shown for invalid email format.
+- **test_register_with_weak_password**  
+  Ensures error is shown for weak password.
+- **test_register_with_already_registered_email**  
+  Ensures error is shown for an already registered email.
+- **test_register_with_javascript_email_and_valid_password**  
+  Checks for script injection in the email field.
+- **test_register_with_valid_new_email_and_password**  
+  Verifies successful registration with valid new credentials.
+
+### 2. Login User (`tests/test_login_user.py`)
+- **test_login_with_empty_email_and_password**  
+  Verifies login fails with both fields empty.
+- **test_login_with_valid_email_and_empty_password**  
+  Checks login with valid email but empty password.
+- **test_login_with_empty_email_and_valid_password**  
+  Checks login with empty email but valid password.
+- **test_login_with_wrong_password**  
+  Ensures error is shown for incorrect password.
+- **test_login_with_old_valid_credentials**  
+  Verifies login with existing valid credentials.
+- **test_login_with_new_registered_credentials**  
+  Verifies login with newly registered credentials.
+- **test_login_page_remember_me_checkbox**  
+  Checks the functionality of the "Remember Me" checkbox.
+- **test_login_page_lost_your_password_link**  
+  Verifies the "Lost your password" link displays the reset password option.
+- **test_register_with_javascript_email_and_valid_password**  
+  Checks for script injection in the email field during login.
+
+### 3. Billing Address Page (`tests/test_billing_address_page.py`)
+
+- **test_complete_edit_billing_address**  
+  Verifies user can complete and save billing address with all valid data.
+- **test_complete_edit_billing_address_without_mandatory_fields**  
+  Checks that the billing address can be saved when optional fields are left empty.
+- **test_save_billing_address_first_name_field_min_length_check**  
+  Ensures an error is shown if the first name is shorter than the minimum allowed length.
+- **test_save_billing_address_with_empty_first_name_field**  
+  Ensures an error is displayed when the first name field is left empty.
+- **test_save_billing_address_with_invalid_first_name_field**  
+  Ensures an error is shown if the first name contains special characters.
+- **test_save_billing_address_with_javascript_code_inside_first_name_field**  
+  Ensures an error is shown if the first name contains JavaScript code (script injection).
+- **test_save_billing_address_last_name_field_min_length_check**  
+  Ensures an error is shown if the last name is shorter than the minimum allowed length.
+- **test_save_billing_address_with_empty_last_name_field**  
+  Ensures an error is displayed when the last name field is left empty.
+- **test_save_billing_address_with_invalid_last_name_field**  
+  Ensures an error is shown if the last name contains special characters.
+- **test_save_billing_address_with_javascript_code_inside_last_name_field**  
+  Ensures an error is shown if the last name contains JavaScript code (script injection).
+- **test_save_billing_address_with_empty_email_field**  
+  Ensures an error is displayed when the email field is left empty.
+- **test_save_billing_address_with_invalid_email_format**  
+  Ensures an error appears for invalid email formats.
+- **test_save_billing_address_with_javascript_code_inside_email_field**  
+  Ensures an error is shown if the email field contains JavaScript code (script injection).
+- **test_save_billing_address_with_javascript_code_inside_company_name_field**  
+  Ensures an error is shown if the company name contains JavaScript code (script injection).
+- **test_save_billing_address_with_invalid_char_inside_company_name_field**  
+  Ensures an error is shown if the company name contains special characters.
+- **test_save_billing_address_with_empty_phone_field**  
+  Ensures an error is displayed when the phone field is left empty.
+- **test_save_billing_address_with_invalid_phone_format**  
+  Ensures an error for phone numbers that are too short or not valid.
+- **test_save_billing_address_with_max_length_phone_check**  
+  Ensures an error for phone numbers that are too long.
+- **test_save_billing_address_with_javascript_code_inside_phone_field**  
+  Ensures an error is shown if the phone field contains JavaScript code (script injection).
+- **test_save_billing_address_with_string_inside_phone_field**  
+  Ensures an error is shown if the phone field contains alphabetic characters.
+- **test_save_billing_address_with_empty_address_1_field**  
+  Ensures an error is displayed when Address Line 1 is left empty.
+- **test_save_billing_address_with_invalid_address_1_format**  
+  Ensures an error for invalid Address Line 1 format (e.g., special characters).
+- **test_save_billing_address_with_min_length_address_1_check**  
+  Ensures an error is shown if Address Line 1 is too short.
+- **test_save_billing_address_with_javascript_code_inside_address_1_field**  
+  Ensures an error is shown if Address Line 1 contains JavaScript code.
+- **test_save_billing_address_with_javascript_code_inside_address_2_field**  
+  Ensures an error is shown if Address Line 2 contains JavaScript code.
+- **test_save_billing_address_with_invalid_char_inside_address_2_field**  
+  Ensures an error is shown if Address Line 2 contains special characters.
+- **test_save_billing_address_with_empty_city_field**  
+  Ensures an error is displayed when the city field is left empty.
+- **test_save_billing_address_with_invalid_city_format**  
+  Ensures an error for invalid city format (e.g., special characters).
+- **test_save_billing_address_with_min_length_city_check**  
+  Ensures an error is shown if the city name is too short.
+- **test_save_billing_address_with_javascript_code_inside_city_field**  
+  Ensures an error is shown if the city field contains JavaScript code.
+- **test_save_billing_address_with_empty_postcode_field**  
+  Ensures an error is displayed when the postcode field is left empty.
+- **test_save_billing_address_with_invalid_postcode_format**  
+  Ensures an error for invalid postcode format (e.g., too short).
+- **test_save_billing_address_with_max_length_postcode_check**  
+  Ensures an error for postcode values that are too long.
+- **test_save_billing_address_with_javascript_code_inside_postcode_field**  
+  Ensures an error is shown if the postcode field contains JavaScript code.
+- **test_save_billing_address_with_string_inside_postcode_field**  
+  Ensures an error is shown if the postcode field contains alphabetic characters.
+- **test_billing_address_country_dropdown**  
+  Verifies that the country dropdown allows selection and saves the correct country.
+- **test_billing_address_state_dropdown**  
+  Verifies that the state dropdown allows selection and saves the correct state.
+
+### 4. Shipping Address Page (`tests/test_shipping_adress_page.py`)
+
+- **test_complete_edit_shipping_address**  
+  Verifies user can complete and save shipping address with all valid data.
+- **test_complete_edit_shipping_address_without_mandatory_fields**  
+  Checks that the shipping address can be saved when optional fields are left empty.
+- **test_save_shipping_address_first_name_field_min_length_check**  
+  Ensures an error is shown if the first name is shorter than the minimum allowed length.
+- **test_save_shipping_address_with_empty_first_name_field**  
+  Ensures an error is displayed when the first name field is left empty.
+- **test_save_shipping_address_with_invalid_first_name_field**  
+  Ensures an error is shown if the first name contains special characters.
+- **test_save_shipping_address_with_javascript_code_inside_first_name_field**  
+  Ensures an error is shown if the first name contains JavaScript code (script injection).
+- **test_save_shipping_address_last_name_field_min_length_check**  
+  Ensures an error is shown if the last name is shorter than the minimum allowed length.
+- **test_save_shipping_address_with_empty_last_name_field**  
+  Ensures an error is displayed when the last name field is left empty.
+- **test_save_shipping_address_with_invalid_last_name_field**  
+  Ensures an error is shown if the last name contains special characters.
+- **test_save_shipping_address_with_javascript_code_inside_last_name_field**  
+  Ensures an error is shown if the last name contains JavaScript code (script injection).
+- **test_save_shipping_address_with_javascript_code_inside_company_name_field**  
+  Ensures an error is shown if the company name contains JavaScript code (script injection).
+- **test_save_shipping_address_with_invalid_char_inside_company_name_field**  
+  Ensures an error is shown if the company name contains special characters.
+- **test_save_shipping_address_with_empty_address_1_field**  
+  Ensures an error is displayed when Address Line 1 is left empty.
+- **test_save_shipping_address_with_invalid_address_1_format**  
+  Ensures an error for invalid Address Line 1 format (e.g., special characters).
+- **test_save_shipping_address_with_min_length_address_1_check**  
+  Ensures an error is shown if Address Line 1 is too short.
+- **test_save_shipping_address_with_javascript_code_inside_address_1_field**  
+  Ensures an error is shown if Address Line 1 contains JavaScript code.
+- **test_save_shipping_address_with_javascript_code_inside_address_2_field**  
+  Ensures an error is shown if Address Line 2 contains JavaScript code.
+- **test_save_shipping_address_with_invalid_char_inside_address_2_field**  
+  Ensures an error is shown if Address Line 2 contains special characters.
+- **test_save_shipping_address_with_empty_city_field**  
+  Ensures an error is displayed when the city field is left empty.
+- **test_save_shipping_address_with_invalid_city_format**  
+  Ensures an error for invalid city format (e.g., special characters).
+- **test_save_shipping_address_with_min_length_city_check**  
+  Ensures an error is shown if the city name is too short.
+- **test_save_shipping_address_with_javascript_code_inside_city_field**  
+  Ensures an error is shown if the city field contains JavaScript code.
+- **test_save_shipping_address_with_empty_postcode_field**  
+  Ensures an error is displayed when the postcode field is left empty.
+- **test_save_shipping_address_with_invalid_postcode_format**  
+  Ensures an error for invalid postcode format (e.g., too short).
+- **test_save_shipping_address_with_max_length_postcode_check**  
+  Ensures an error for postcode values that are too long.
+- **test_save_shipping_address_with_javascript_code_inside_postcode_field**  
+  Ensures an error is shown if the postcode field contains JavaScript code.
+- **test_save_shipping_address_with_string_inside_postcode_field**  
+  Ensures an error is shown if the postcode field contains alphabetic characters.
+- **test_shipping_address_country_dropdown**  
+  Verifies that the country dropdown allows selection and saves the correct country.
+- **test_shipping_address_state_dropdown**  
+  Verifies that the state dropdown allows selection and saves the correct state.
+
+### 5. Shop Page (`tests/test_add_remove_products_to_cart.py`)
+
+- **test_delete_already_added_items_from_cart**  
+  Empties the cart to ensure a clean state before running other tests.
+- **test_get_items_from_shop_page**  
+  Retrieves all available items from the shop page and verifies items are present.
+- **test_random_items_from_shop_page_to_cart**  
+  Randomly selects items from the shop page and adds them to the cart.
+- **test_number_of_items_in_cart**  
+  Verifies that the number of items in the cart matches the number of items added.
+- **test_total_amount_of_cart**  
+  Checks that the total amount in the cart matches the expected sum of item prices and quantities.
+- **test_page_reload_is_not_resetting_the_cart**  
+  Ensures that reloading the page does not reset the cart contents.
+- **test_items_quantity_matching_with_total_on_cart_page**  
+  Verifies that the total quantity of items displayed on the cart page matches the number of items added.
+- **test_items_price_matching_with_total_on_cart_page**  
+  Ensures that the total price on the cart page matches the sum of (price × quantity) for all items.
+- **test_items_name_matching_with_total_on_cart_page**  
+  Checks that the names of items in the cart match the names of items added from the shop page.
+- **test_update_items_quantity_in_cart**  
+  Updates the quantity of items in the cart and verifies the update is reflected.
+- **test_total_price_after_updating_the_cart**  
+  Verifies that the total cart price updates correctly after changing item quantities.
 
 🚀 Happy Testing!
