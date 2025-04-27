@@ -78,4 +78,7 @@ current_cart_count = "//span[@class='cartcontents' and contains(text(),'{item_nu
 # cart page
 
 button_remove_item_from_cart = "//td[@class='product-remove']//a"
+product_name_on_cart_page = "(//td[@class='product-name'])[{item_num}]"
+product_price_on_cart_page = "(//td[@class='product-price'])[{item_num}]"
+product_quantity_on_cart_page = "(//td[@class='product-quantity']//input)[{item_num}]"
 empty_cart_message = "//p[@class='cart-empty']"
