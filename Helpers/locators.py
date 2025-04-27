@@ -66,3 +66,8 @@ button_save_address = "//input[@name='save_address']"
 items_in_shop = "//ul[contains(@class,'products')]//li"
 item_names = "(//ul[contains(@class,'products')]//li//h3)[{item_num}]"
 item_prices = "((//ul[contains(@class,'products')]//span[@class='price'])[{item_num}]//span[contains(@class,'amount')])[last()]"
+
+cart_amount = "(//a[@title='View your shopping cart']//span)[last()]"
+number_of_items_in_cart = "//span[@class='cartcontents']"
+button_add_to_cart = "(//a[contains(@class,'add_to_cart')])[{item_num}]"
+current_cart_count = "//span[@class='cartcontents' and contains(text(),'{item_num}')]"
