@@ -10,6 +10,22 @@ log = customLogger.get_logger()
 
 class ShopPage(BasePage):
 
+    def make_cart_empty(self):
+        num_of_items_in_cart = self.get_number_of_items_in_cart()
+        if num_of_items_in_cart > 0:
+            log.info(f"Emptying cart")
+            driver_helpers.click_element(self.driver, locators.number_of_items_in_cart)
+            driver_helpers.wait_till_element_is_visible(self.driver, locators.button_remove_item_from_cart, timeout=10)
+            cart_items = driver_helpers.find_elements(self.driver, locators.button_remove_item_from_cart)
+            for item in cart_items:
+                driver_helpers.click_element(self.driver, locators.button_remove_item_from_cart)
+            driver_helpers.wait_till_element_is_visible(self.driver, locators.empty_cart_message, timeout=10)
+            log.info("Cart is now empty")
+            driver_helpers.click_element(self.driver, locators.shop_link)
+        else:
+            log.info("Cart is already empty")
+
+
     def get_all_item_details(self):
         item_dict = {}
         items_in_shop = driver_helpers.find_elements(self.driver, locators.items_in_shop)
@@ -29,7 +45,7 @@ class ShopPage(BasePage):
             log.info(f"item name is: {value['name']} and price: {value['price']}")
             driver_helpers.click_element(self.driver, locators.button_add_to_cart.format(item_num=key))
             log.info(f"Added {value['name']} to cart")
-            driver_helpers.wait_till_element_is_visible(self.driver, locators.current_cart_count.format(item_num=count), timeout=10)
+            driver_helpers.wait_till_element_is_visible(self.driver, locators.current_cart_count.format(item_num=count), timeout=60)
             count += 1
 
     def get_number_of_items_in_cart(self):

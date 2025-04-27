@@ -18,6 +18,10 @@ class TestShopPage:
         return {"all_items": {}, "selected_items": {}}
 
     @pytest.mark.positive_cases
+    def test_delete_already_added_items_from_cart(self, shop_item_details):
+        self.shop_page_obj.make_cart_empty()
+
+    @pytest.mark.positive_cases
     def test_get_items_from_shop_page(self, shop_item_details):
         item_details = self.shop_page_obj.get_all_item_details()
         assert len(item_details) > 0
