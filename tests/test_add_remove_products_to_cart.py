@@ -7,7 +7,7 @@ from Pages.cart_page import CartPage
 
 
 @pytest.mark.run(order=3)
-@pytest.mark.shop_page
+@pytest.mark.shop_page_cases
 class TestShopPage:
 
     @pytest.fixture(scope="class", autouse=True)
