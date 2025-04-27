@@ -146,9 +146,9 @@ def load_time(driver, timeout):
     return driver.set_page_load_timeout(timeout)
 
 
-def click_element(driver, locator, timeout=30):
+def click_element(driver, locator, timeout=30, element=None):
     move_to_the_element_using_javascript(driver, locator)
-    element = get_element(driver, locator, timeout)
+    element = get_element(driver, locator, timeout) if not element else element
     wait_till_element_is_clickable(driver, locator, timeout)
     log.info(f"clicking on locator {locator}")
     try:
