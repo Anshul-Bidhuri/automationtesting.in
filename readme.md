@@ -12,7 +12,8 @@ created using Selenium and pytest frameworks.
 3. Create a virtual environment using command: python -m venv venv
 4. Activate the virtual environment using command: source venv/bin/activate (for Mac) or venv/Scripts/activate (for Windows)
 5. Install the dependencies using command: pip install -r requirements.txt
-6. Run the test cases using command: pytest --html=AutomationAssignment.html --self-contained-html --disable-warnings
+6. Run the test cases using command: pytest --html=AutomationAssignment.html --self-contained-html --disable-warnings -n 3 --dist=loadfile
+
 
 The run command will also generate an HTML report named AutomationAssignment.html after the test execution.
 
